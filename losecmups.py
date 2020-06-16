@@ -25,7 +25,7 @@ def grabPrice(vendor, url, component, qty , dataArr):
             return data;
       
       if (len(products) == 3): #drogaraia
-            # salva o preço promocional
+            # combo promo price
             product = products[2]
             price_text = unicodedata.normalize("NFKD", product.get_text())
             price_text = re.sub(r"\s+", "", price_text)
@@ -34,7 +34,7 @@ def grabPrice(vendor, url, component, qty , dataArr):
             unit_price = float(price / qty)
             data = np.append(dataArr, np.array( [(vendor,unit_price,price,qty,current_time)], dtype=dtype))
             
-            # salva o preço atual
+            # price without combo
             product = products[1]
             price_text = unicodedata.normalize("NFKD", product.get_text())
             price_text = re.sub(r"\s+", "", price_text)
@@ -46,7 +46,7 @@ def grabPrice(vendor, url, component, qty , dataArr):
             return data;
       
       if (len(products) == 2): #drogaraia
-            # salva o preço promocional
+            # combo promo price
             product = products[1]
             price_text = unicodedata.normalize("NFKD", product.get_text())
             price_text = re.sub(r"\s+", "", price_text)
@@ -55,7 +55,7 @@ def grabPrice(vendor, url, component, qty , dataArr):
             unit_price = float(price / qty)
             data = np.append(dataArr, np.array( [(vendor,unit_price,price,qty,current_time)], dtype=dtype))
             
-            # salva o preço atual
+            # price without combo
             product = products[0]
             price_text = unicodedata.normalize("NFKD", product.get_text())
             price_text = re.sub(r"\s+", "", price_text)
@@ -79,21 +79,27 @@ if __name__ == '__main__':
       data = grabPrice("Panvel","https://www.panvel.com/panvel/losec-mups-10mg-14-capsulas/p-396745","item-price__value",14,data)
       data = grabPrice("DrogaRaia","https://www.drogaraia.com.br/losec-mups-10-mg-14-comprimidos-revestidos.html",["price","regular-price"],14,data)
 
-      np.sort(data, order='unit_price') 
-      print("Mais barato:",str(data[0][0]))
-      print("Preco:",str(data[0][2]))
-      print("Caixa com:",str(data[0][3]),"unidades")
+      #sort so that lowest price can be displayed
+      np.sort(data, order='unit_price')
 
-      filename='C:\\Users\\Luciano_M_Rodrigues\\Documents\\LosecMups.xlsx'
+      #print lowest price
+      print(current_time,": ",data[0][0], " R$", data[0][2]," - Caixa com ",data[0][3],"cp")
       
+      try:
+            # open existing excel file
+            filename='C:\\Users\\Luciano_M_Rodrigues\\Documents\\LosecMups.xlsx'
+            xlsL = pd.ExcelFile(filename)
+            dfOriginal = pd.read_excel(xlsL, 'Sheet1')
+      except:
+            dfOriginal = pd.DataFrame()
+     
+      #create panda dataframe
       dfNew = pd.DataFrame(data)
-
-      xlsL = pd.ExcelFile(filename)
-      dfOriginal = pd.read_excel(xlsL, 'Sheet1')
       
+      #append to the excel file
       dfOutput = pd.DataFrame.append(dfOriginal,dfNew,sort=False)
-      print(dfOutput)
+      #sort by lowest unit price
+      dfOutput = dfOutput.sort_values(by=['unit_price'])
 
+      #save excel
       dfOutput.to_excel(filename, sheet_name='Sheet1',encoding='utf-8',index=False)
-
-

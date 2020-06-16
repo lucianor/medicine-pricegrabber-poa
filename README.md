@@ -2,6 +2,8 @@
 Grab prices from pharmacies in Porto Alegre
 
 This is a custom code to grab prices from Panvel, DrogaRaia and Pague Menos pharmacies in Brazil.
+It will show in console the lowest price at the moment, and export it to Excel.
+
 You can specify the product pages, and it will automatically grab the price and even compare unit price between different 
 product quantities.
 
