@@ -15,3 +15,6 @@ I have created one file per each remedy. No global files have been created yet.
 
 TODO: separate grabbing for each pharmacy
 TODO: create global grabbing methods and classes
+
+Designed to work with Python 3
+Uses Pandas and BeautifulSoup4 libraries (pip install bs4 pandas)
