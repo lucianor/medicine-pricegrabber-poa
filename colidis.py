@@ -49,22 +49,21 @@ def grabPrice(vendor, url, component, qty , data):
       return data;
 
 if __name__ == '__main__':
+      #COLIDS
       # create initial dataframe with column naming
       data = pd.DataFrame(columns=['name','unit_price','price','qty','date'])
-      
-      #LOSEC MUPS
+
       #start grabing data
-      data = grabPrice("PagueMenos","https://www.paguemenos.com.br/losec-mups-10mg-com-14-comprimidos/p","vtex-store-components-3-x-sellingPriceValue",14,data)
-      data = grabPrice("PagueMenos","https://www.paguemenos.com.br/losec-mups-10mg-com-28-comprimidos/p","vtex-store-components-3-x-sellingPriceValue",28,data)
-      data = grabPrice("Panvel","https://www.panvel.com/panvel/losec-mups-10mg-14-capsulas/p-396745","item-price__value",14,data)
-      data = grabPrice("DrogaRaia","https://www.drogaraia.com.br/losec-mups-10-mg-14-comprimidos-revestidos.html",["price","regular-price"],14,data)
+      data = grabPrice("PagueMenos","https://www.paguemenos.com.br/colidis-gotas-5ml-colidis-gotas-5ml-colikids/p","vtex-store-components-3-x-sellingPriceValue",1,data)
+      data = grabPrice("Panvel","https://www.panvel.com/panvel/colidis-gotas-5ml/p-118734","item-price__value",1,data)
+      data = grabPrice("DrogaRaia","https://www.drogaraia.com.br/colidis-5ml.html",["price","regular-price"],1,data)
       #sort so that lowest price can be displayed
       data = data.sort_values(by=['unit_price'])
       #print lowest price
-      print(data.iloc[0]['date'],": LOSEC MUPS -",data.iloc[0]['name'], " R$", data.iloc[0]['price']," - Caixa com ",data.iloc[0]['qty'],"cp")
+      print(data.iloc[0]['date'],": COLIDIS -",data.iloc[0]['name'], " R$", data.iloc[0]['price'])
       try:
             # open existing excel file
-            filename='C:\\Users\\Luciano_M_Rodrigues\\Documents\\LosecMups.xlsx'
+            filename='C:\\Users\\Luciano_M_Rodrigues\\Documents\\Colids.xlsx'
             xlsL = pd.ExcelFile(filename)
             dfOriginal = pd.read_excel(xlsL, 'Sheet1')
       except:
