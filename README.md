@@ -11,10 +11,10 @@ Example:
 20 pills with a price of BRL 70, costs 3.5 BRL for each pill
 40 pills with a price of BRL 130, costs 3.25 BRL for each pill
 
-I have created one file per each remedy. No global files have been created yet.
+*TODO*: separate grabbing for each pharmacy
+*TODO*: create global grabbing methods and classes
 
-TODO: separate grabbing for each pharmacy
-TODO: create global grabbing methods and classes
-
-Designed to work with Python 3
-Uses Pandas and BeautifulSoup4 libraries (pip install bs4 pandas)
+Requirements
+------------
+Python 3
+Pandas and BeautifulSoup4 libraries: pip install bs4 pandas
