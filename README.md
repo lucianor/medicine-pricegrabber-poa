@@ -8,13 +8,23 @@ You can specify the product pages, and it will automatically grab the price and 
 product quantities.
 
 Example: 
+
 20 pills with a price of BRL 70, costs 3.5 BRL for each pill
+
 40 pills with a price of BRL 130, costs 3.25 BRL for each pill
 
-*TODO*: separate grabbing for each pharmacy
-*TODO*: create global grabbing methods and classes
+*TODO LIST*
+
+-separate grabbing for each pharmacy
+
+-create global grabbing methods and classes
 
 Requirements
 ------------
 Python 3
-Pandas and BeautifulSoup4 libraries: pip install bs4 pandas
+
+Pandas 
+
+BeautifulSoup4 
+
+$ pip install bs4 pandas
